@@ -70,14 +70,6 @@ function Intro() {
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
               </a>
-              <a
-                href={personalInfo.resumeLink}
-                className="btn btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download CV
-              </a>
             </motion.div>
           </motion.div>
 
@@ -178,6 +170,11 @@ function Intro() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
+          onClick={() => {
+            document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           <span>Scroll Down</span>
           <div className="scroll-arrow">
@@ -192,4 +189,5 @@ function Intro() {
 }
 
 export default Intro;
+
 

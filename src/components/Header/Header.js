@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { navLinks, personalInfo } from '../../data/portfolio';
+import { navLinks, personalInfo, resumeLink } from '../../data/portfolio';
 import './Header.css';
 
 function Header() {
@@ -70,7 +70,7 @@ function Header() {
               transition={{ delay: navLinks.length * 0.1 }}
             >
               <a
-                href={personalInfo.resumeLink}
+                href={resumeLink}
                 className="nav-link nav-btn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -97,4 +97,5 @@ function Header() {
 }
 
 export default Header;
+
 

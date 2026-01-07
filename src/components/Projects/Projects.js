@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { FaFilePdf, FaExpand, FaTimes, FaDownload } from 'react-icons/fa';
+import { FaFilePdf, FaExpand, FaTimes, FaDownload, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { projects } from '../../data/portfolio';
 import './Projects.css';
 
@@ -12,6 +12,11 @@ function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_DISPLAY_COUNT = 3;
+  const hasMoreProjects = projects.length > INITIAL_DISPLAY_COUNT;
+  const displayedProjects = showAll ? projects : projects.slice(0, INITIAL_DISPLAY_COUNT);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -83,70 +88,99 @@ function Projects() {
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
         >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              className="project-card pdf-card"
-              variants={cardVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-              onClick={() => openViewer(project)}
-            >
-              {/* PDF Thumbnail */}
-              <div className="pdf-thumbnail">
-                <Document
-                  file={project.pdfUrl}
-                  loading={
-                    <div className="pdf-loading">
-                      <FaFilePdf className="pdf-icon" />
-                      <span>Loading preview...</span>
+          <AnimatePresence>
+            {displayedProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                className="project-card pdf-card"
+                variants={cardVariants}
+                whileHover={{ y: -10, scale: 1.02 }}
+                onClick={() => openViewer(project)}
+                layout
+              >
+                {/* PDF Thumbnail */}
+                <div className="pdf-thumbnail">
+                  <Document
+                    file={project.pdfUrl}
+                    loading={
+                      <div className="pdf-loading">
+                        <FaFilePdf className="pdf-icon" />
+                        <span>Loading preview...</span>
+                      </div>
+                    }
+                    error={
+                      <div className="pdf-error">
+                        <FaFilePdf className="pdf-icon" />
+                        <span>PDF Document</span>
+                      </div>
+                    }
+                  >
+                    <Page
+                      pageNumber={1}
+                      width={350}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                    />
+                  </Document>
+                  
+                  {/* Overlay */}
+                  <div className="pdf-overlay">
+                    <div className="overlay-content">
+                      <FaExpand className="expand-icon" />
+                      <span>Click to View</span>
                     </div>
-                  }
-                  error={
-                    <div className="pdf-error">
-                      <FaFilePdf className="pdf-icon" />
-                      <span>PDF Document</span>
-                    </div>
-                  }
-                >
-                  <Page
-                    pageNumber={1}
-                    width={350}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                  />
-                </Document>
-                
-                {/* Overlay */}
-                <div className="pdf-overlay">
-                  <div className="overlay-content">
-                    <FaExpand className="expand-icon" />
-                    <span>Click to View</span>
+                  </div>
+
+                  {/* PDF Badge */}
+                  <div className="pdf-badge">
+                    <FaFilePdf /> PDF
                   </div>
                 </div>
 
-                {/* PDF Badge */}
-                <div className="pdf-badge">
-                  <FaFilePdf /> PDF
+                {/* Project Content */}
+                <div className="project-content">
+                  <h3 className="project-name">{project.name}</h3>
+                  <p className="project-description">{project.description}</p>
+                  
+                  {/* Tags */}
+                  <div className="project-tags">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="project-content">
-                <h3 className="project-name">{project.name}</h3>
-                <p className="project-description">{project.description}</p>
-                
-                {/* Tags */}
-                <div className="project-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
+
+        {/* View More / View Less Button */}
+        {hasMoreProjects && (
+          <motion.div
+            className="projects-toggle"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <button
+              className="toggle-btn"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? (
+                <>
+                  Show Less <FaChevronUp />
+                </>
+              ) : (
+                <>
+                  View More ({projects.length - INITIAL_DISPLAY_COUNT} more) <FaChevronDown />
+                </>
+              )}
+            </button>
+          </motion.div>
+        )}
       </div>
 
       {/* PDF Viewer Modal */}

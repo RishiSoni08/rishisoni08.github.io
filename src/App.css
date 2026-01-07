@@ -1,5 +1,5 @@
 /* ============================================
-   APP STYLES
+   APP STYLES - Elegant Light Theme
    ============================================ */
 
 .app {
@@ -23,7 +23,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.4;
+  opacity: 0.3;
   animation: float 20s ease-in-out infinite;
 }
 
@@ -69,29 +69,29 @@ section {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  background: var(--bg-primary);
 }
 
-#projects {
+#experience {
+  background: var(--bg-tertiary);
+  position: relative;
+}
+
+#education {
   background: var(--bg-secondary);
   position: relative;
 }
 
-#projects::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
-  pointer-events: none;
+#projects {
+  background: var(--bg-primary);
+  position: relative;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .bg-blob {
     filter: blur(60px);
-    opacity: 0.3;
+    opacity: 0.2;
   }
   
   .blob-1 {
@@ -109,4 +109,3 @@ section {
     height: 150px;
   }
 }
-

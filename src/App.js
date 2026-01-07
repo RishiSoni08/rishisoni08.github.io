@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Header from './components/Header/Header';
 import Intro from './components/Intro/Intro';
+import Experience from './components/Experience/Experience';
+import Education from './components/Education/Education';
 import Projects from './components/Projects/Projects';
 import Footer from './components/Footer/Footer';
 import './App.css';
@@ -35,6 +37,16 @@ function App() {
           <section id="projects">
             <Projects />
           </section>
+
+          {/* Experience Section */}
+          <section id="experience">
+            <Experience />
+          </section>
+
+          {/* Education Section */}
+          <section id="education">
+            <Education />
+          </section>
         </motion.div>
       </main>
 
@@ -45,4 +57,3 @@ function App() {
 }
 
 export default App;
-

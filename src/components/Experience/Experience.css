@@ -1,0 +1,182 @@
+/* ============================================
+   EXPERIENCE SECTION STYLES - Light Theme
+   ============================================ */
+
+.experience {
+  padding: 120px 0;
+  background: var(--bg-tertiary);
+  position: relative;
+}
+
+.experience .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.experience .section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.experience .section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Experience Grid */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Experience Card */
+.experience-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  overflow: visible;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card Header - Colored Top */
+.card-header {
+  padding: 30px 24px 50px;
+  text-align: center;
+  border-radius: 16px 16px 0 0;
+}
+
+.company-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Logo */
+.logo-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  padding: 12px;
+  border: 3px solid var(--bg-secondary);
+}
+
+.logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Card Body */
+.card-body {
+  padding: 60px 24px 28px;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-radius: 0 0 16px 16px;
+}
+
+.role-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.date-range {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 16px 0;
+  font-weight: 500;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+/* Highlights List */
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.highlights li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 80px 0;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 400px;
+  }
+
+  .logo-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-wrapper {
+    top: 65px;
+  }
+
+  .card-body {
+    padding: 55px 20px 24px;
+  }
+}
